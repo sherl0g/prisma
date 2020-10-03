@@ -20,10 +20,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-.item-inner .event {
-
-}
-
-</style>
