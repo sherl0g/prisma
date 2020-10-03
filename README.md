@@ -1,4 +1,4 @@
-# sherlog-dashboard
+# Sherlog Prisma
 
 ## Project setup
 ```
