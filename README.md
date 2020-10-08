@@ -1,5 +1,5 @@
 # Sherlog Prisma
-
+An intuitive observability client for [@sherlog/cli](https://github.com/sherl0g/cli). Replay and drill down through multiple log types as data is piped in
 <p align="center">
   <br>
   <img src="prisma-social.png" alt="Prisma Client" width="640" height="320">
