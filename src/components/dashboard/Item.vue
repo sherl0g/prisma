@@ -1,6 +1,6 @@
 <template>
   <div class="item-inner">
-    <div class="d-flex event">
+    <div class="d-flex event" style="min-height: 50px">
       <div class="p-2 flex-shrink-1 border-right" style="width: 190px">{{ source.datetime }}</div>
       <div class="p-2 w-100">{{ source.event }}</div>
     </div>
