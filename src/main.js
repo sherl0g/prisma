@@ -3,9 +3,13 @@ import moment from 'moment';
 import formatDuration from 'format-duration';
 import router from './router';
 import App from './App.vue';
+import 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-Vue.config.devtools = true;
-Vue.config.productionTip = false;
+const { NODE_ENV } = process.env;
+
+Vue.config.devtools = NODE_ENV !== 'production';
+Vue.config.productionTip = NODE_ENV !== 'production';
 
 Vue.filter('duration', (value) => formatDuration(Number(value) * 1000));
 

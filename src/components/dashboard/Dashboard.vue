@@ -53,6 +53,7 @@
                   :lazy="true"
                   :enable-cross="false"
                   :tooltip="'none'"
+                  :silent="true"
                   @change="onChange"
                 ></vue-slider>
               </div>
@@ -69,7 +70,7 @@
           </div>
         </div>
         <div class="d-flex justify-content-between mb-2">
-          <div>
+          <div v-bind:class="{'text-clear': darkTheme}">
             {{status()}}
           </div>
           <div>
@@ -383,7 +384,7 @@ export default {
       logs = [];
       domain.forEach((t, key) => {
         if (!store[t]) return;
-        const events = pick(store[t], this.filters);
+        const events = (this.filters.length > 1) ? pick(store[t], this.filters) : store[t];
 
         Object.keys(events).forEach((event) => {
           if (!metrics[event]) {
@@ -406,20 +407,22 @@ export default {
       };
     },
     render: debounce(function render() {
-      const self = this;
-      const metrics = this.getTimeSeries();
-      if (Object.keys(metrics).length) {
-        const r = () => {
-          self.items = self.getPageData(10);
-          self.eventSummary = horizontalChart(metrics.count, true, 15);
-          self.dataSeries = {
-            y: 'events',
-            series: metrics.series,
-            dates: metrics.domain.map(utcParse('%s')),
+      if (Visibility.state() !== 'hidden') {
+        const self = this;
+        const metrics = this.getTimeSeries();
+        if (Object.keys(metrics).length) {
+          const r = () => {
+            self.items = self.getPageData(10);
+            self.eventSummary = horizontalChart(metrics.count, true, 15);
+            self.dataSeries = {
+              y: 'events',
+              series: metrics.series,
+              dates: metrics.domain.map(utcParse('%s')),
+            };
           };
-        };
 
-        window.requestAnimationFrame(r);
+          window.requestAnimationFrame(r);
+        }
       }
     }, 250),
   },
