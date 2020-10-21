@@ -2,7 +2,7 @@
   <div id="chart" class="w-100 h-100"></div>
 </template>
 <script>
-import { get } from 'lodash';
+import { debounce, get } from 'lodash';
 import * as d3 from 'd3';
 
 export default {
@@ -114,7 +114,7 @@ export default {
           .attr('font-weight', 'bold')
           .text(this.data.y));
     },
-    moved(event, path, dot, svg) {
+    moved: debounce((event, path, dot, svg) => {
       event.preventDefault();
       const pointer = d3.pointer(event, get(svg, '_groups.0.0'));
       const xm = this.x.invert(pointer[0]);
@@ -137,16 +137,16 @@ export default {
         .attr('class', 'chart-tip')
         .text(`${d3.utcFormat('%a %b %e %X %Y')(xm)} | ${s.name} ${s.values[i]}`);
       // .style('fill', 'red').attr('font-weight', 'bold'); // TODO dark mode
-    },
-    entered(path, dot) {
+    }, 500),
+    entered: debounce((path, dot) => {
       path.style('mix-blend-mode', null).attr('stroke', '#ddd');
       dot.attr('display', null);
-    },
-    left(path, dot) {
+    }, 500),
+    left: debounce((path, dot) => {
       path.style('mix-blend-mode', null).attr('stroke', null);
       dot.attr('display', 'none');
-    },
-    hover(svg, path, dot) {
+    }, 500),
+    hover: debounce((svg, path, dot) => {
       const self = this;
       if ('ontouchstart' in document) {
         svg
@@ -172,7 +172,7 @@ export default {
         .style('fill', 'none')
         .style('stroke-width', '1.5px')
         .style('stroke-dasharray', '3 3');
-    },
+    }, 500),
     chart() {
       if (!this.data.series.length) return;
       // console.log('Rendering chart...');

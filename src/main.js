@@ -3,7 +3,6 @@ import moment from 'moment';
 import formatDuration from 'format-duration';
 import router from './router';
 import App from './App.vue';
-import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const { NODE_ENV } = process.env;
