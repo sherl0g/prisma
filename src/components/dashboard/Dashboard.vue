@@ -406,7 +406,7 @@ export default {
         domain, series, count,
       };
     },
-    render: debounce(function render() {
+    render: debounce(() => {
       if (Visibility.state() !== 'hidden') {
         const self = this;
         const metrics = this.getTimeSeries();
