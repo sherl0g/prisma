@@ -7,7 +7,7 @@ An intuitive observability client for [@sherlog/cli](https://github.com/sherl0g/
   <br>
 </p>
 
-Demo: [https://sherlog.sh](https://sherlog.sh)
+Demo: <a href="https://sherlog.sh" target="_blank">https://sherlog.sh</a>
 
 ## Project setup
 
