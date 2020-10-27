@@ -2,7 +2,7 @@
   <div id="chart" class="w-100 h-100"></div>
 </template>
 <script>
-import { debounce, get } from 'lodash';
+import { throttle, get } from 'lodash';
 import * as d3 from 'd3';
 
 export default {
@@ -114,7 +114,8 @@ export default {
           .attr('font-weight', 'bold')
           .text(this.data.y));
     },
-    moved: debounce((event, path, dot, svg) => {
+    // eslint-disable-next-line prefer-arrow-callback
+    moved: throttle(function moved(event, path, dot, svg) {
       event.preventDefault();
       const pointer = d3.pointer(event, get(svg, '_groups.0.0'));
       const xm = this.x.invert(pointer[0]);
@@ -137,16 +138,19 @@ export default {
         .attr('class', 'chart-tip')
         .text(`${d3.utcFormat('%a %b %e %X %Y')(xm)} | ${s.name} ${s.values[i]}`);
       // .style('fill', 'red').attr('font-weight', 'bold'); // TODO dark mode
-    }, 500),
-    entered: debounce((path, dot) => {
+    }, 60),
+    // eslint-disable-next-line prefer-arrow-callback
+    entered: throttle(function entered(path, dot) {
       path.style('mix-blend-mode', null).attr('stroke', '#ddd');
       dot.attr('display', null);
-    }, 500),
-    left: debounce((path, dot) => {
+    }, 60),
+    // eslint-disable-next-line prefer-arrow-callback
+    left: throttle(function left(path, dot) {
       path.style('mix-blend-mode', null).attr('stroke', null);
       dot.attr('display', 'none');
-    }, 500),
-    hover: debounce((svg, path, dot) => {
+    }, 60),
+    // eslint-disable-next-line prefer-arrow-callback
+    hover: throttle(function hover(svg, path, dot) {
       const self = this;
       if ('ontouchstart' in document) {
         svg
@@ -172,7 +176,7 @@ export default {
         .style('fill', 'none')
         .style('stroke-width', '1.5px')
         .style('stroke-dasharray', '3 3');
-    }, 500),
+    }, 60),
     chart() {
       if (!this.data.series.length) return;
       // console.log('Rendering chart...');

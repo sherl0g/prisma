@@ -1,0 +1,26 @@
+dist: bionic
+language: node_js
+node_js:
+  - 10
+  - 11
+  - 12
+  - 13
+  - 14
+addons:
+  apt:
+    packages:
+      - libgconf-2-4
+      - xvfb
+      - libxtst6
+      - libnss3
+      - libgtk-3-0
+      - libxss1
+      - libasound2
+  chrome: stable
+env:
+  - CYPRESS_VIDEO=false
+install:
+  - yarn install
+script:
+  - yarn run lint
+  - yarn run test:e2e:chrome

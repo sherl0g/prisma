@@ -58,7 +58,7 @@ body {
 }
 
 .darkTheme {
-  background: $darker;
+  background-color: $darker;
 }
 
 body.darkTheme {

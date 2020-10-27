@@ -42,7 +42,7 @@
                 </button>
               </div>
               <div class="input-group" v-bind:class="{'text-clear': darkTheme}">
-                <span class="small">{{player.current | duration}}/{{player.duration | duration}}</span>
+                <span class="small duration">{{player.current | duration}}/{{player.duration | duration}}</span>
               </div>
               <div class="flex-grow-1 mx-3">
                 <vue-slider
@@ -332,6 +332,7 @@ export default {
         }
       }, 1000);
     },
+    // eslint-disable-next-line prefer-arrow-callback
     sync: debounce(function sync() {
       const [start, end] = this.domain;
       const t0 = moment.utc(start, 'X');
@@ -406,7 +407,8 @@ export default {
         domain, series, count,
       };
     },
-    render: debounce(() => {
+    // eslint-disable-next-line prefer-arrow-callback
+    render: debounce(function render() {
       if (Visibility.state() !== 'hidden') {
         const self = this;
         const metrics = this.getTimeSeries();
