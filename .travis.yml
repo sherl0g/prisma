@@ -2,10 +2,6 @@ dist: bionic
 language: node_js
 node_js:
   - 10
-  - 11
-  - 12
-  - 13
-  - 14
 addons:
   apt:
     packages:
@@ -17,6 +13,8 @@ addons:
       - libxss1
       - libasound2
   chrome: stable
+env:
+  - CYPRESS_VIDEO=false
 install:
   - yarn install
 script:
