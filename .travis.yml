@@ -10,6 +10,12 @@ addons:
   apt:
     packages:
       - libgconf-2-4
+      - xvfb
+      - libxtst6
+      - libnss3
+      - libgtk-3-0
+      - libxss1
+      - libasound2
   chrome: stable
 install:
   - yarn install

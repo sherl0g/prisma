@@ -39,12 +39,3 @@ describe('Dashboard test', () => {
     cy.get('body').should('have.css', 'background-color', 'rgb(255, 255, 255)');
   });
 });
-
-// TODO test play button is visible
-// TODO test zoom button is visible
-// TODO test status text is connecting...
-// TODO test play button is hidden while track is playing
-// TODO test play button renders logs and charts
-// TODO test pause button is visible while track is playing
-// TODO test pause button is hidden after clicking it
-// TODO test duration no longer contains 0:00/0:00
