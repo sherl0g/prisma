@@ -5,10 +5,14 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "docker:build": "docker build -t sherlog/prisma .",
+    "docker:test": "npm run docker:build && docker run -it sherlog/prisma",
+    "test": "npm run docker:test",
     "test:unit": "vue-cli-service test:unit",
-    "test:e2e": "vue-cli-service test:e2e",
+    "test:e2e": "vue-cli-service test:e2e  --browser chrome",
     "lint": "vue-cli-service lint",
-    "lint:fix": "vue-cli-service lint --fix"
+    "lint:fix": "vue-cli-service lint --fix",
+    "test:e2e:chrome": "vue-cli-service test:e2e  --browser chrome"
   },
   "dependencies": {
     "ascii-horizontal-barchart": "^1.3.3",
