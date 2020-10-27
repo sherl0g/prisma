@@ -1,8 +1,8 @@
 <p align="center">
-    <a href="https://travis-ci.com/sherl0g/cli">
+    <a href="https://travis-ci.com/sherl0g/prisma">
         <img src="https://img.shields.io/travis/sherl0g/prisma/main.svg?logo=travis" alt="Build Status">
     </a>
-    <a href="https://github.com/sherl0g/cli/blob/main/LICENSE">
+    <a href="https://github.com/sherl0g/prisma/blob/main/LICENSE">
         <img src="https://img.shields.io/packagist/l/laravel/jetstream" alt="License">
     </a>
 </p>
