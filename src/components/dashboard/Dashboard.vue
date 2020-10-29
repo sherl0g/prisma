@@ -293,8 +293,7 @@ export default {
         if (socket) {
           this.messageStatus = 'connecting...';
         }
-        // socket = new WebSocket(`ws://${window.location.host}`);
-        socket = new WebSocket('ws://localhost:8000');
+        socket = new WebSocket(`ws://${window.location.host}`);
         socket.addEventListener('open', socketOpenListener);
         socket.addEventListener('message', socketMessageListener);
         socket.addEventListener('close', debounce(socketCloseListener, 8000));
