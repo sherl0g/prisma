@@ -17,10 +17,14 @@ addons:
       - libxss1
       - libasound2
   chrome: stable
+cache:
+  directories:
+    - ~/.cache
 env:
   - CYPRESS_VIDEO=false
 install:
   - yarn install
 script:
+  - node ./node_modules/browserslist/cli.js
   - yarn run lint
   - yarn run test:e2e:chrome
