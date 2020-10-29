@@ -17,6 +17,9 @@ addons:
       - libxss1
       - libasound2
   chrome: stable
+cache:
+  directories:
+    - ~/.cache
 env:
   - CYPRESS_VIDEO=false
 install:
