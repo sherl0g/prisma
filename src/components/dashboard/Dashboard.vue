@@ -30,12 +30,12 @@
           <div class="col-12 border-top pl-1 " v-bind:class="{'player-controls-dark': darkTheme}">
             <div class="btn-toolbar d-flex align-items-center" role="toolbar" aria-label="Toolbar with button groups">
               <div class="btn-group" role="group" aria-label="First group">
-                <button v-if="!hidePlay()" v-on:click="play()" type="button" class="btn btn-link" v-bind:class="{'text-clear': darkTheme}">
+                <button v-if="!hidePlay()" v-on:click="play()" type="button" class="btn btn-link btn-play" v-bind:class="{'text-clear': darkTheme}">
                   <svg width="1.7em" height="1.7em" viewBox="0 0 16 16" class="bi bi-play-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path d="M11.596 8.697l-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
                   </svg>
                 </button>
-                <button v-if="!hidePause()" v-on:click="pause()" type="button" class="btn btn-link" v-bind:class="{'text-clear': darkTheme}">
+                <button v-if="!hidePause()" v-on:click="pause()" type="button" class="btn btn-link btn-pause" v-bind:class="{'text-clear': darkTheme}">
                   <svg width="1.7em" height="1.7em" viewBox="0 0 16 16" class="bi bi-pause" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5zm4 0a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5z"/>
                   </svg>
@@ -58,7 +58,7 @@
                 ></vue-slider>
               </div>
               <div class="btn-group" role="group" aria-label="First group">
-                <button v-on:click="zoomIn()" v-bind:class="{'text-clear': darkTheme}" type="button" class="btn btn-link">
+                <button v-show="player.current > 2" v-on:click="zoomIn()" v-bind:class="{'text-clear': darkTheme}" type="button" class="btn btn-link btn-zoom">
                   <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-zoom-in" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
                     <path d="M10.344 11.742c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1 6.538 6.538 0 0 1-1.398 1.4z"/>
@@ -70,7 +70,7 @@
           </div>
         </div>
         <div class="d-flex justify-content-between mb-2">
-          <div v-bind:class="{'text-clear': darkTheme}">
+          <div class="status-message" v-bind:class="{'text-clear': darkTheme}">
             {{status()}}
           </div>
           <div>
@@ -135,7 +135,7 @@ export default {
     return {
       items: [],
       itemComponent: Item,
-      messageStatus: '',
+      messageStatus: 'connecting...',
       eventSummary: null,
       dataSeries: {
         y: 'events',
@@ -293,7 +293,8 @@ export default {
         if (socket) {
           this.messageStatus = 'connecting...';
         }
-        socket = new WebSocket(`ws://${window.location.host}`);
+        // socket = new WebSocket(`ws://${window.location.host}`);
+        socket = new WebSocket('ws://localhost:8000');
         socket.addEventListener('open', socketOpenListener);
         socket.addEventListener('message', socketMessageListener);
         socket.addEventListener('close', debounce(socketCloseListener, 8000));
@@ -385,8 +386,7 @@ export default {
       logs = [];
       domain.forEach((t, key) => {
         if (!store[t]) return;
-        const events = (this.filters.length > 1) ? pick(store[t], this.filters) : store[t];
-
+        const events = (this.filters.length > 0) ? pick(store[t], this.filters) : {};
         Object.keys(events).forEach((event) => {
           if (!metrics[event]) {
             metrics[event] = { name: event, values: Array(domain.length).fill(0) };
