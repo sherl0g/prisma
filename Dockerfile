@@ -9,13 +9,10 @@ COPY . .
 ##############################################################################
 # Setting environment variables
 ##############################################################################
-ENV NODE_ENV test
+ENV NODE_ENV development
 ENV NVM_DIR /root/.nvm
 ENV NODE_VERSION 10.15.0
 ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
-ENV DOCKER true
-
-
 
 ##############################################################################
 # This forces the image to be build on every push!
