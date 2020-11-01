@@ -21,7 +21,7 @@ cache:
   directories:
     - ~/.cache
 env:
-  - NODE_ENV=test
+  - NODE_ENV=development
 install:
   - npm install -g @sherlog/cli && yarn install
 script:
