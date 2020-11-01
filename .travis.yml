@@ -21,9 +21,9 @@ cache:
   directories:
     - ~/.cache
 env:
-  - CYPRESS_VIDEO=false
+  - NODE_ENV=development
 install:
-  - yarn install
+  - npm install -g @sherlog/cli && yarn install
 script:
   - node ./node_modules/browserslist/cli.js
   - yarn run lint
