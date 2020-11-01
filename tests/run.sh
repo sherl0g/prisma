@@ -2,5 +2,6 @@
 
 set -euxo pipefail
 yarn run lint
-yarn run test:e2e:chrome --headless
+yarn run test:e2e:chrome
+
 

@@ -9,11 +9,11 @@ COPY . .
 ##############################################################################
 # Setting environment variables
 ##############################################################################
-ENV NODE_ENV development
-ENV CYPRESS_VIDEO false
+ENV NODE_ENV test
 ENV NVM_DIR /root/.nvm
 ENV NODE_VERSION 10.15.0
 ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
+ENV DOCKER true
 
 
 
@@ -32,7 +32,7 @@ SHELL ["/bin/bash", "--login", "-c"]
 ##############################################################################
 
 RUN apt update --fix-missing && \
-	apt install -y curl wget apt-utils gnupg2 xvfb libxtst6 libnss3 libgtk-3-0 libxss1 libasound2 && \
+	apt install -y curl vim wget apt-utils gnupg2 xvfb libxtst6 libnss3 libgtk-3-0 libxss1 libasound2 && \
 	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.36.0/install.sh | bash && \
 	source $NVM_DIR/nvm.sh && \
 	nvm install $NODE_VERSION
@@ -62,5 +62,5 @@ RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.d
 ##############################################################################
 # Install project dependencies
 ##############################################################################
-RUN yarn install
+RUN npm install -g @sherlog/cli && yarn install
 CMD [ "./tests/run.sh"]

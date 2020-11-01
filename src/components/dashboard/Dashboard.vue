@@ -22,8 +22,7 @@
           <div class="col-lg-3 d-none d-lg-block">
             <div class="d-flex flex-column border-lg-left h-100" >
               <div class="p-2 flex-fill w-100">
-              <pre
-                v-bind:class="{'text-clear': darkTheme}">{{eventSummary}}</pre>
+              <pre id="h-chart-count" v-bind:class="{'text-clear': darkTheme}">{{eventSummary}}</pre>
               </div>
             </div>
           </div>
@@ -117,9 +116,13 @@ import Visibility from 'visibilityjs';
 import workerpool from 'workerpool';
 import VirtualList from 'vue-virtual-scroll-list';
 import VueSlider from 'vue-slider-component';
-import Item from './Item.vue';
+import Item from '@/components/dashboard/Item.vue';
 import 'vue-slider-component/theme/default.css';
 
+const {
+  NODE_ENV,
+  VUE_APP_WEBSOCKET_TEST_HOST,
+} = process.env;
 const store = {};
 let logs = [];
 const worker = workerpool.pool();
@@ -293,7 +296,7 @@ export default {
         if (socket) {
           this.messageStatus = 'connecting...';
         }
-        socket = new WebSocket(`ws://${window.location.host}`);
+        socket = new WebSocket(`ws://${NODE_ENV === 'production' ? window.location.host : VUE_APP_WEBSOCKET_TEST_HOST}`);
         socket.addEventListener('open', socketOpenListener);
         socket.addEventListener('message', socketMessageListener);
         socket.addEventListener('close', debounce(socketCloseListener, 8000));
