@@ -2,6 +2,7 @@
     <a href="https://travis-ci.com/sherl0g/prisma">
         <img src="https://img.shields.io/travis/sherl0g/prisma/main.svg?logo=travis" alt="Build Status">
     </a>
+    <a href='https://coveralls.io/github/sherl0g/prisma?branch=main'><img src='https://coveralls.io/repos/github/sherl0g/prisma/badge.svg?branch=main' alt='Coverage Status' /></a>
     <a href="https://github.com/sherl0g/prisma/blob/main/LICENSE">
         <img src="https://img.shields.io/github/license/sherl0g/prisma" alt="License">
     </a>

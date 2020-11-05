@@ -27,4 +27,6 @@ install:
 script:
   - node ./node_modules/browserslist/cli.js
   - yarn run lint
-  - yarn run test:e2e:chrome
+  - yarn run test:e2e:headless
+  - yarn run coverage
+  - yarn run coveralls
