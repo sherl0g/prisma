@@ -263,6 +263,7 @@ export default {
       const collection = this.get(store, path);
       this.set(store, path, Array.isArray(collection) ? collection.concat(event.events) : [].concat(event.events));
     },
+    /* istanbul ignore next */
     format(batch) {
       return worker.exec((event) => new Promise((resolve) => {
         // eslint-disable-next-line prefer-object-spread

@@ -14,7 +14,10 @@ module.exports = (on, config) => {
   //  webpackOptions: require('@vue/cli-service/webpack.config'),
   //  watchOptions: {}
   // }))
-
+  // eslint-disable-next-line import/no-extraneous-dependencies,global-require
+  require('@cypress/code-coverage/task')(on, config);
+  // IMPORTANT to return the config object
+  // with the any changed environment variables
   return {
     ...config,
     fixturesFolder: 'tests/e2e/fixtures',
