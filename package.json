@@ -13,7 +13,7 @@
     "lint": "cross-env NODE_ENV=test vue-cli-service lint",
     "lint:fix": "cross-env NODE_ENV=test vue-cli-service lint --fix",
     "test:e2e:headless": "cross-env NODE_ENV=test vue-cli-service test:e2e --headless --browser chrome",
-    "coverage": "npx nyc report --reporter=text-summary && npx nyc report --reporter=lcov --reporter=text",
+    "coverage": "npx nyc report --reporter=lcov --reporter=text && npx nyc report --reporter=text-summary",
     "coveralls": "coveralls < ./coverage/lcov.info"
   },
   "dependencies": {

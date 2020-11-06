@@ -16,6 +16,8 @@ module.exports = (on, config) => {
   // }))
   // eslint-disable-next-line import/no-extraneous-dependencies,global-require
   require('@cypress/code-coverage/task')(on, config);
+  // eslint-disable-next-line import/no-extraneous-dependencies,global-require
+  on('file:preprocessor', require('@cypress/code-coverage/use-babelrc'));
   // IMPORTANT to return the config object
   // with the any changed environment variables
   return {
