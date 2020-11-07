@@ -3,7 +3,7 @@ const path = require('path');
 const config = path.normalize(`${path.resolve(__dirname)}/../fixtures/.sherlog`);
 
 describe('Dashboard test', () => {
-  it('check for title value is @sherlog/prisma', () => {
+  it('check for title value matches @sherlog/prisma', () => {
     cy.visit('/');
     cy.title().should('eq', '@sherlog/prisma');
   });
@@ -32,8 +32,28 @@ describe('Dashboard test', () => {
     cy.get('.duration').contains('0:00/0:00');
   });
 
+  it('nginx:http filter should not be visible', () => {
+    cy.get('input[type=\'checkbox\']:first').should('not.be.visible');
+  });
+
+  it('nginx:error filter should not be visible', () => {
+    cy.get('input[type=\'checkbox\']:last').should('not.be.visible');
+  });
+
   it('zoom button should be hidden', () => {
     cy.get('.btn-zoom').should('be.hidden');
+  });
+
+  it('Line chart should not be visible', () => {
+    cy.get('#chart').should('be.empty');
+  });
+
+  it('horizontal bar chart should not be visible', () => {
+    cy.get('#h-chart-count').should('be.empty');
+  });
+
+  it('Logs grid should not be visible', () => {
+    cy.get('#logs-grid').should('not.be.visible');
   });
 
   it('status message contains text "connecting..."', () => {
@@ -51,7 +71,7 @@ describe('Dashboard test', () => {
     const kill = 'xargs kill -9';
     cy.exec(`ps aux | grep -v grep | grep 'slg' | awk '{print $2}' | ${kill}`, { log: true, failOnNonZeroExit: false });
     cy.exec(`slg start --port 8083 --config .${config} >/dev/null 2>&1 </dev/null &`, { log: true, failOnNonZeroExit: false }).its('code').should('eq', 0);
-    cy.wait(12000);
+    cy.wait(13000);
   });
 
   it('status message contains text connected', () => {
@@ -68,6 +88,14 @@ describe('Dashboard test', () => {
     cy.get('.btn-play').should('not.be.visible');
   });
 
+  it('nginx:http filter should be visible', () => {
+    cy.get('input[type=\'checkbox\']:first').should('be.visible');
+  });
+
+  it('nginx:error filter should be visible', () => {
+    cy.get('input[type=\'checkbox\']:last').should('be.visible');
+  });
+
   it('zoom button should be visible', () => {
     cy.get('.btn-zoom').should('be.visible');
   });
@@ -78,6 +106,7 @@ describe('Dashboard test', () => {
 
   it('horizontal bar chart should be rendered', () => {
     cy.get('#h-chart-count').contains('nginx:http');
+    cy.get('#h-chart-count').contains('nginx:error');
   });
 
   it('Logs grid should be rendered', () => {
@@ -90,6 +119,31 @@ describe('Dashboard test', () => {
     cy.get('.btn-play').should('be.visible');
   });
 
+  it('unchecking all filters should render any data', () => {
+    cy.get('input[type=\'checkbox\']').uncheck();
+    cy.get('#h-chart-count').should('not.contain', 'nginx:http');
+    cy.get('#h-chart-count').should('not.contain', 'nginx:error');
+  });
+
+  it('checking nginx:http should not contain nginx:error', () => {
+    cy.get('input[type=\'checkbox\']:first').check();
+    cy.get('#h-chart-count').should('not.contain', 'nginx:error');
+  });
+
+  it('checking nginx:error should not contain nginx:http', () => {
+    cy.get('input[type=\'checkbox\']').uncheck();
+    cy.get('input[type=\'checkbox\']:last').check();
+    cy.get('#h-chart-count').should('not.contain', 'nginx:http');
+  });
+
+  it('checking all filters should display all data', () => {
+    cy.get('input[type=\'checkbox\']').uncheck();
+    cy.get('input[type=\'checkbox\']:first').check();
+    cy.get('input[type=\'checkbox\']:last').check();
+    cy.get('#h-chart-count').contains('nginx:http');
+    cy.get('#h-chart-count').contains('nginx:error');
+  });
+
   it('should stop sherlog service', () => {
     cy.exec('ps aux | grep -v grep | grep \'slg\' | awk \'{print $2}\' | xargs kill -9', { log: true, failOnNonZeroExit: false }).its('code').should('eq', 0);
     cy.wait(5000);
@@ -99,3 +153,6 @@ describe('Dashboard test', () => {
     cy.get('.status-message').contains('connecting...');
   });
 });
+
+// TODO test chart hover interaction
+// TODO test zoom feature
