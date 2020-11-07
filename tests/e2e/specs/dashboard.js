@@ -119,7 +119,7 @@ describe('Dashboard test', () => {
     cy.get('.btn-play').should('be.visible');
   });
 
-  it('unchecking all filters should render any data', () => {
+  it('unchecking all filters should not render any data', () => {
     cy.get('input[type=\'checkbox\']').uncheck();
     cy.get('#h-chart-count').should('not.contain', 'nginx:http');
     cy.get('#h-chart-count').should('not.contain', 'nginx:error');
