@@ -128,7 +128,7 @@ let logs = [];
 const worker = workerpool.pool();
 
 export default {
-  name: 'DashboardV2',
+  name: 'Dashboard',
   components: {
     VirtualList,
     MultiLineChart,

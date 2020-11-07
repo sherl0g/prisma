@@ -1,4 +1,6 @@
 {
   "video": false,
-  "pluginsFile": "tests/e2e/plugins/index.js"
+  "pluginsFile": "tests/e2e/plugins/index.js",
+  "viewportWidth": 1000,
+  "viewportHeight": 1000
 }
