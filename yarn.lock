@@ -1094,10 +1094,10 @@
     postcss "7.0.32"
     purgecss "^3.0.0"
 
-"@fullhuman/vue-cli-plugin-purgecss@~3.0.1":
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/@fullhuman/vue-cli-plugin-purgecss/-/vue-cli-plugin-purgecss-3.0.1.tgz#11cb7193615f11a20f374cb4e6ddba56615be9f3"
-  integrity sha512-m3Gi/EIreSM+DHZThfDPFtsy14AZBvdzU2kG6Wu/lkypTzewxR1OKGePu1lBvrVZ1/kE67lIr5D49rqS17dseA==
+"@fullhuman/vue-cli-plugin-purgecss@~4.0.2":
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/@fullhuman/vue-cli-plugin-purgecss/-/vue-cli-plugin-purgecss-4.0.2.tgz#9571222d06513b3bf04d63f8b2fb812e7ad54d35"
+  integrity sha512-LdQKrKKTEbrg8F4nfAa6fFPeLrThPakDT/Nt9nC904cvxq91uTHVdwlCja2FpPTL6fAya5RvH6gbuWCQwRyPbw==
 
 "@hapi/address@2.x.x":
   version "2.1.4"
