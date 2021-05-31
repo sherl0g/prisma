@@ -32,7 +32,7 @@
     "workerpool": "^6.0.3"
   },
   "devDependencies": {
-    "@cypress/code-coverage": "^3.8.6",
+    "@cypress/code-coverage": "^3.9.6",
     "@fullhuman/postcss-purgecss": "^3.0.0",
     "@fullhuman/vue-cli-plugin-purgecss": "~3.0.1",
     "@vue/cli-plugin-babel": "~4.5.9",
